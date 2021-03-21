@@ -36,6 +36,7 @@ services:
         - node.role == worker
     image: academiaonline/dca-dockercoins:latest-webui
     networks:
+    - redis
     - webui
   worker:
     deploy:
@@ -44,5 +45,8 @@ services:
         - node.role == worker
     image: academiaonline/dca-dockercoins:latest-worker
     networks:
+    - hasher
+    - redis
+    - rng
     - worker
 version: '3.8'    
