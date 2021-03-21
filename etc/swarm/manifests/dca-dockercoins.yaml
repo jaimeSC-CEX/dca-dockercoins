@@ -1,3 +1,9 @@
+networks:
+  hasher:
+  redis:
+  rng:
+  webui:
+  worker:
 services:
   hasher:
     deploy:
@@ -5,28 +11,38 @@ services:
         constraints:
         - node.role == worker
     image: academiaonline/dca-dockercoins:latest-hasher
+    networks:
+    - hasher
   redis:
     deploy:
       placement:
         constraints:
         - node.role == worker  
     image: redis
+    networks:
+    - redis
   rng:
     deploy:
       placement:
         constraints:
         - node.role == worker
     image: academiaonline/dca-dockercoins:latest-rng
+    networks:
+    - rng
   webui:
     deploy:
       placement:
         constraints:
         - node.role == worker
     image: academiaonline/dca-dockercoins:latest-webui
+    networks:
+    - webui
   worker:
     deploy:
       placement:
         constraints:
         - node.role == worker
     image: academiaonline/dca-dockercoins:latest-worker
+    networks:
+    - worker
 version: '3.8'    
