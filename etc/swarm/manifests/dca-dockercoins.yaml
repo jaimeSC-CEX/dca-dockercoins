@@ -5,10 +5,6 @@ networks:
     internal: true
   rng:
     internal: true
-  webui:
-    internal: true
-  worker:
-    internal: true
 services:
   hasher:
     deploy:
@@ -42,7 +38,6 @@ services:
     image: academiaonline/dca-dockercoins:latest-webui
     networks:
     - redis
-    - webui
   worker:
     deploy:
       placement:
@@ -53,5 +48,4 @@ services:
     - hasher
     - redis
     - rng
-    - worker
 version: '3.8'    
