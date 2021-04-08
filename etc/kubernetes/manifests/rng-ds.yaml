@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: rng
+spec: 
+  selector: 
+    matchLabels: 
+      app: rng
+  template: 
+    metadata: 
+      labels: 
+        app: rng
+    spec: 
+      containers:
+        -
+          image: academiaonline/dca-dockercoins:latest-rng
+          name: rng
+          ports: 
+            -
+              containerPort: 8080
+              protocol: TCP
