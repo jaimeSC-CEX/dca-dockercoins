@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Services
+metadata: 
+  name: rng
+spec: 
+  ports:
+    -
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector: 
+    app: rng
+  type: ClusterIP
