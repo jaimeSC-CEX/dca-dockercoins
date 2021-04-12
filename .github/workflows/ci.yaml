@@ -1,0 +1,26 @@
+name: ci
+on:  
+  push: 
+    branches: 
+      - docker
+jobs:
+  docker:
+    runs-on: ubuntu-18.04
+    steps: 
+      - 
+        name: checkout
+        uses: actions/checkout@v2
+      -
+        name: tests
+        run:  |
+          
+          set -x
+           
+          for x in hasher rng webui worker 
+            do
+              docker build --tag jaima/dca-dockercoins:latest-testing-$x $x/
+            done
+          
+           
+          
+          
