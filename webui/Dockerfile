@@ -1,7 +1,5 @@
 FROM node:4-slim
-RUN npm install express
-RUN npm install redis
-COPY files/ /files/
-COPY webui.js /
+RUN npm install express && npm install redis
+COPY . .
 CMD ["node", "webui.js"]
 EXPOSE 8080
