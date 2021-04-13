@@ -21,6 +21,48 @@ jobs:
               docker build --tag jaima/dca-dockercoins:latest-testing-$x $x/
             done
           
-           
+          for x in hasher rng redis 
+            do
+              docker network create $x
+            done
           
+          for x in redis
+            do
+              docker run --detach --name $x --network $x --volume $x:/data $x
+            done
+          
+          for x in hasher rng 
+            do
+              docker run --detach --name $x --network $x jaima/dca-dockercoins:latest-testing-$x
+            done
+          
+          for x in webui worker
+            do
+              docker run --detach --name $x --network redis jaima/dca-dockercoins:latest-testing-$x
+            done
+          
+          for x in hasher rng
+            do
+              docker network connect $x worker
+            done
+          
+          while true
+            do
+              sleep 10
+              docker logs worker | grep 'Coin found' && break
+            done
+                    
+          while true
+            do
+              sleep 10
+              docker logs redis | grep 'Ready to accept connections' && break
+            done
+            
+          while true
+            do
+              sleep 10
+              docker logs webui | grep 'WEBUI running on port 8080' && break
+            done
+          
+          exit 0
           
