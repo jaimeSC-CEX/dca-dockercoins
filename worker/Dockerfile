@@ -1,5 +1,4 @@
 FROM python:3-alpine
-RUN pip install redis
-RUN pip install requests
-COPY worker.py /
+RUN pip install redis && pip install requests
+COPY . .
 CMD ["python", "worker.py"]
