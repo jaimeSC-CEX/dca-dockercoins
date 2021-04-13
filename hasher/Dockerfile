@@ -4,5 +4,7 @@ COPY . .
 
 FROM scratch
 COPY --from=multilayers / /
-CMD ["ruby", "hasher.rb"]
+
+CMD ["ruby", "hasher.rb"] 
+ENTRYPOINT [ "irb" ]
 EXPOSE 8080
