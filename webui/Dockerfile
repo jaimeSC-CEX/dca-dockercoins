@@ -1,8 +1,11 @@
 FROM node:4-slim AS multilayer
-RUN npm install express && npm install redis
 COPY . .
-CMD ["node", "webui.js"]
-EXPOSE 8080
+RUN npm install express && npm install redis
+
 
 FROM scratch
 COPY --from=multilayer / /
+
+CMD ["webui.js"]
+ENTRYPOINT ["node"]
+EXPOSE 8080
