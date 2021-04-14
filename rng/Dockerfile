@@ -1,8 +1,10 @@
 FROM python:3-alpine AS multilayer
-RUN pip install Flask
 COPY . .
-CMD ["python", "rng.py"]
-EXPOSE 8080
+RUN pip install Flask
 
 FROM scratch
 COPY --from=multilayer / /
+
+CMD ["rng.py"]
+ENTRYPOINT ["python"]
+EXPOSE 8080
