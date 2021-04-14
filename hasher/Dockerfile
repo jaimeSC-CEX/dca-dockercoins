@@ -5,6 +5,8 @@ COPY . .
 FROM scratch
 COPY --from=multilayers / /
 
-CMD ["ruby", "hasher.rb"] 
-ENTRYPOINT [ "irb" ]
+CMD ["hasher.rb"] 
+ENTRYPOINT [ "ruby" ]
+ENV GEM_HOME /usr/local/bundle
+ENV PATH $GEM_HOME/bin:$PATH
 EXPOSE 8080
