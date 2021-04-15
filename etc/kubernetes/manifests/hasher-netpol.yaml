@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: 
+  name: hasher-netpol
+spec:
+  ingress: 
+    - 
+      from: 
+        - 
+          namespaceSelector: 
+            matchExpressions:
+              - 
+                key: namespace
+                operator: In
+                values: 
+                  - dca-dockercoins
+                  - dca-phpinfo
+            matchLabels: 
+              namespace: dca-dockercoins
+              namespace: dca-phpinfo
+          podSelector: 
+            matchLabels: 
+              app: worker
+      ports: 
+        -
+          port: 8080
+          protocol: TCP
+  podSelector:
+    matchLabels:  
+      app: hasher
+  policyTypes:
+    - Ingress
+      
